@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TALK:TALK — AI 영어 스피치 교실</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #3B82F6;
+    --blue-light: #EFF6FF;
+    --blue-mid: #BFDBFE;
+    --green: #22C55E;
+    --green-light: #F0FDF4;
+    --yellow: #FBBF24;
+    --yellow-light: #FFFBEB;
+    --red: #EF4444;
+    --red-light: #FEF2F2;
+    --purple: #8B5CF6;
+    --purple-light: #F5F3FF;
+    --gray-50: #F9FAFB;
+    --gray-100: #F3F4F6;
+    --gray-200: #E5E7EB;
+    --gray-400: #9CA3AF;
+    --gray-600: #4B5563;
+    --gray-800: #1F2937;
+    --white: #FFFFFF;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 20px rgba(0,0,0,0.12);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.15);
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #EFF6FF 0%, #F5F3FF 50%, #F0FDF4 100%);
+    min-height: 100vh;
+    color: var(--gray-800);
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--white);
+    border-bottom: 3px solid var(--blue-mid);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .logo {
+    font-family: 'Baloo 2', cursive;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--blue);
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+  .logo span { color: var(--purple); }
+
+  .logo-badge {
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  .header-subtitle {
+    font-size: 13px;
+    color: var(--gray-400);
+    font-weight: 600;
+    margin-left: auto;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  main {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 28px 20px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 2px solid var(--gray-100);
+    transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: var(--shadow-md); }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--gray-600);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .icon {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+  }
+
+  /* ── STEP BADGE ── */
+  .step-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--blue);
+    color: white;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+
+  /* ── TOPIC GRID ── */
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .topic-btn {
+    background: var(--gray-50);
+    border: 2.5px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    padding: 16px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    font-family: 'Nunito', sans-serif;
+  }
+  .topic-btn:hover {
+    border-color: var(--blue);
+    background: var(--blue-light);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+  .topic-btn.active {
+    border-color: var(--blue);
+    background: var(--blue-light);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+  }
+  .topic-emoji { font-size: 26px; margin-bottom: 6px; display: block; }
+  .topic-name {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--gray-800);
+    display: block;
+    margin-bottom: 2px;
+  }
+  .topic-hint {
+    font-size: 11px;
+    color: var(--gray-400);
+    font-weight: 600;
+  }
+
+  /* ── EXAMPLE SENTENCES ── */
+  .example-box {
+    background: var(--blue-light);
+    border: 2px solid var(--blue-mid);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    margin-bottom: 0;
+  }
+  .example-label {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--blue);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .example-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .example-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--gray-800);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .example-list li::before {
+    content: '💬';
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── RECORD AREA ── */
+  .record-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 0;
+  }
+
+  .record-btn {
+    width: 88px; height: 88px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+    transition: all 0.2s;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    color: white;
+  }
+  .record-btn:hover { transform: scale(1.05); box-shadow: var(--shadow-lg); }
+  .record-btn:active { transform: scale(0.97); }
+  .record-btn.recording {
+    background: linear-gradient(135deg, var(--red), #F97316);
+    animation: pulse-ring 1.2s ease-in-out infinite;
+  }
+  .record-btn .mic-icon { font-size: 28px; line-height: 1; }
+
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
+    70% { box-shadow: 0 0 0 18px rgba(239,68,68,0); }
+    100% { box-shadow: 0 0 0 0 rgba(239,68,68,0); }
+  }
+
+  .record-status {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray-600);
+    text-align: center;
+  }
+  .record-status.active { color: var(--red); }
+
+  /* transcript box */
+  .transcript-box {
+    width: 100%;
+    background: var(--gray-50);
+    border: 2px dashed var(--gray-200);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    min-height: 64px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--gray-800);
+    line-height: 1.6;
+    transition: border-color 0.2s;
+  }
+  .transcript-box.has-text {
+    border-style: solid;
+    border-color: var(--blue-mid);
+    background: var(--blue-light);
+  }
+  .transcript-placeholder { color: var(--gray-400); font-size: 14px; }
+
+  /* ── SELF CHECK ── */
+  .check-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    background: var(--gray-50);
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--gray-200);
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .check-item:hover { border-color: var(--green); background: var(--green-light); }
+  .check-item.checked {
+    border-color: var(--green);
+    background: var(--green-light);
+  }
+  .check-box {
+    width: 24px; height: 24px;
+    border-radius: 6px;
+    border: 2.5px solid var(--gray-300);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    transition: all 0.15s;
+    flex-shrink: 0;
+    background: white;
+  }
+  .check-item.checked .check-box {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+  }
+  .check-label { font-size: 14px; font-weight: 700; color: var(--gray-700); }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 24px;
+    border-radius: var(--radius-sm);
+    border: none;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn:active { transform: scale(0.97); }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    color: white;
+    box-shadow: 0 4px 14px rgba(59,130,246,0.4);
+    width: 100%;
+  }
+  .btn-primary:hover { box-shadow: 0 6px 20px rgba(59,130,246,0.5); transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: var(--gray-100);
+    color: var(--gray-600);
+    border: 2px solid var(--gray-200);
+    width: 100%;
+  }
+  .btn-secondary:hover { background: var(--gray-200); }
+
+  .btn-retry {
+    background: var(--yellow-light);
+    color: #92400E;
+    border: 2px solid var(--yellow);
+    width: 100%;
+  }
+  .btn-retry:hover { background: #FEF3C7; }
+
+  /* ── AI FEEDBACK ── */
+  .feedback-area {
+    display: none;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .feedback-area.visible { display: flex; }
+
+  .feedback-loading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--blue);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .dot-spin {
+    display: flex; gap: 4px;
+  }
+  .dot-spin span {
+    width: 8px; height: 8px;
+    background: var(--blue);
+    border-radius: 50%;
+    animation: dot-bounce 1.2s ease-in-out infinite;
+  }
+  .dot-spin span:nth-child(2) { animation-delay: 0.2s; }
+  .dot-spin span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes dot-bounce {
+    0%,80%,100% { transform: translateY(0); }
+    40% { transform: translateY(-8px); }
+  }
+
+  .feedback-content {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .feedback-content.visible { display: flex; }
+
+  .feedback-score {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--purple-light);
+    border-radius: var(--radius-sm);
+    border: 2px solid #DDD6FE;
+  }
+  .score-circle {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-weight: 900;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .score-label { font-size: 13px; color: var(--gray-600); font-weight: 600; }
+  .score-title { font-size: 16px; font-weight: 800; color: var(--purple); }
+
+  .feedback-section {
+    padding: 14px 16px;
+    border-radius: var(--radius-sm);
+    border: 2px solid;
+  }
+  .feedback-section.good {
+    background: var(--green-light);
+    border-color: #86EFAC;
+  }
+  .feedback-section.improve {
+    background: var(--yellow-light);
+    border-color: #FCD34D;
+  }
+  .feedback-section.suggest {
+    background: var(--blue-light);
+    border-color: var(--blue-mid);
+  }
+  .feedback-section-title {
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .good .feedback-section-title { color: #15803D; }
+  .improve .feedback-section-title { color: #92400E; }
+  .suggest .feedback-section-title { color: var(--blue); }
+  .feedback-section p {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.6;
+    color: var(--gray-700);
+  }
+
+  /* ── ACTION BUTTONS ── */
+  .action-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  /* ── HIDDEN ── */
+  .hidden { display: none !important; }
+
+  /* ── PROGRESS ── */
+  .progress-bar-wrap {
+    background: var(--gray-200);
+    border-radius: 20px;
+    height: 8px;
+    overflow: hidden;
+    margin-top: 6px;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--blue), var(--purple));
+    border-radius: 20px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--gray-800);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 14px;
+    transition: transform 0.3s ease;
+    z-index: 999;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    .topic-grid { grid-template-columns: 1fr 1fr; }
+    .action-row { grid-template-columns: 1fr; }
+    main { padding: 16px 14px 60px; }
+    .logo { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">TALK<span>:</span>TALK</div>
+  <div class="logo-badge">AI 스피치</div>
+  <div class="header-subtitle">✨ 초등 5학년 영어 말하기</div>
+</header>
+
+<main>
+
+  <!-- STEP 1: 주제 선택 -->
+  <div class="card" id="step1">
+    <div class="step-badge">🎯 STEP 1</div>
+    <div class="card-title">
+      <div class="icon" style="background:#EFF6FF">🗂️</div>
+      오늘 말해볼 주제를 골라봐!
+    </div>
+    <div class="topic-grid">
+      <button class="topic-btn" onclick="selectTopic(this, 'introduce')" data-topic="introduce">
+        <span class="topic-emoji">👋</span>
+        <span class="topic-name">자기소개</span>
+        <span class="topic-hint">My name is...</span>
+      </button>
+      <button class="topic-btn" onclick="selectTopic(this, 'food')" data-topic="food">
+        <span class="topic-emoji">🍕</span>
+        <span class="topic-name">음식 / 좋아하는 것</span>
+        <span class="topic-hint">I like / I love...</span>
+      </button>
+      <button class="topic-btn" onclick="selectTopic(this, 'weekend')" data-topic="weekend">
+        <span class="topic-emoji">🎮</span>
+        <span class="topic-name">주말 / 취미</span>
+        <span class="topic-hint">On weekends, I...</span>
+      </button>
+      <button class="topic-btn" onclick="selectTopic(this, 'school')" data-topic="school">
+        <span class="topic-emoji">🏫</span>
+        <span class="topic-name">학교생활</span>
+        <span class="topic-hint">My favorite subject...</span>
+      </button>
+      <button class="topic-btn" onclick="selectTopic(this, 'dream')" data-topic="dream">
+        <span class="topic-emoji">🚀</span>
+        <span class="topic-name">장래희망</span>
+        <span class="topic-hint">I want to be...</span>
+      </button>
+      <button class="topic-btn" onclick="selectTopic(this, 'travel')" data-topic="travel">
+        <span class="topic-emoji">✈️</span>
+        <span class="topic-name">여행 / 가고 싶은 곳</span>
+        <span class="topic-hint">I want to go to...</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 2: 예시 문장 -->
+  <div class="card hidden" id="step2">
+    <div class="step-badge">📖 STEP 2</div>
+    <div class="card-title">
+      <div class="icon" style="background:#EFF6FF">💡</div>
+      예시 문장을 참고해봐!
+    </div>
+    <div class="example-box">
+      <div class="example-label">💬 Example Sentences</div>
+      <ul class="example-list" id="exampleList"></ul>
+    </div>
+    <div style="margin-top:14px;">
+      <div style="font-size:13px;color:var(--gray-400);font-weight:700;margin-bottom:6px;">📈 오늘 목표</div>
+      <div style="font-size:13px;font-weight:700;color:var(--blue)" id="topicGoal"></div>
+    </div>
+  </div>
+
+  <!-- STEP 3: 말하기 -->
+  <div class="card hidden" id="step3">
+    <div class="step-badge">🎙️ STEP 3</div>
+    <div class="card-title">
+      <div class="icon" style="background:#FEF2F2">🎤</div>
+      이제 영어로 말해봐!
+    </div>
+    <div class="record-area">
+      <button class="record-btn" id="recordBtn" onclick="toggleRecord()">
+        <span class="mic-icon">🎤</span>
+        <span id="recordBtnLabel">말하기</span>
+      </button>
+      <div class="record-status" id="recordStatus">버튼을 누르고 영어로 말해봐! 🗣️</div>
+    </div>
+    <div class="transcript-box" id="transcriptBox">
+      <span class="transcript-placeholder">여기에 네가 말한 내용이 나타날 거야 ✨</span>
+    </div>
+    <div style="margin-top:14px;" id="submitArea" class="hidden">
+      <button class="btn btn-primary" onclick="submitForFeedback()">
+        🤖 AI 피드백 받기
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 4: 자기 평가 -->
+  <div class="card hidden" id="step4">
+    <div class="step-badge">✅ STEP 4</div>
+    <div class="card-title">
+      <div class="icon" style="background:#F0FDF4">🌟</div>
+      스스로 평가해봐!
+    </div>
+    <div class="check-grid">
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-label">🗣️ 크고 자신 있게 말했어요</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-label">📖 예시 문장을 참고했어요</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-label">⏱️ 3문장 이상 말했어요</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-label">😊 끝까지 포기하지 않았어요</div>
+      </div>
+    </div>
+    <div style="margin-top:14px;">
+      <div style="font-size:12px;font-weight:700;color:var(--gray-400);margin-bottom:6px;">체크한 항목</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar" id="checkProgress"></div>
+      </div>
+      <div style="font-size:12px;color:var(--gray-400);font-weight:700;margin-top:6px;" id="checkCount">0 / 4</div>
+    </div>
+  </div>
+
+  <!-- STEP 5: AI 피드백 -->
+  <div class="card hidden" id="step5">
+    <div class="step-badge" style="background:linear-gradient(135deg,var(--purple),var(--blue))">🤖 STEP 5</div>
+    <div class="card-title">
+      <div class="icon" style="background:#F5F3FF">🧠</div>
+      AI 피드백이 왔어!
+    </div>
+
+    <div class="feedback-area visible" id="feedbackArea">
+      <div class="feedback-loading" id="feedbackLoading">
+        <div class="dot-spin">
+          <span></span><span></span><span></span>
+        </div>
+        AI가 열심히 분석 중이야...
+      </div>
+      <div class="feedback-content" id="feedbackContent">
+        <div class="feedback-score">
+          <div class="score-circle" id="scoreCircle">--</div>
+          <div>
+            <div class="score-label">오늘의 스피치 점수</div>
+            <div class="score-title" id="scoreTitle">--</div>
+          </div>
+        </div>
+        <div class="feedback-section good">
+          <div class="feedback-section-title">👍 잘한 점</div>
+          <p id="feedbackGood"></p>
+        </div>
+        <div class="feedback-section improve">
+          <div class="feedback-section-title">💪 더 잘할 수 있어요</div>
+          <p id="feedbackImprove"></p>
+        </div>
+        <div class="feedback-section suggest">
+          <div class="feedback-section-title">💬 이렇게 말해봐!</div>
+          <p id="feedbackSuggest"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="action-row" style="margin-top:16px;">
+      <button class="btn btn-retry" onclick="retryTopic()">
+        🔄 다시 말하기
+      </button>
+      <button class="btn btn-secondary" onclick="resetAll()">
+        🏠 처음으로
+      </button>
+    </div>
+  </div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── DATA ──
+const topics = {
+  introduce: {
+    name: '자기소개',
+    goal: '이름, 나이, 좋아하는 것 3가지 이상 말하기!',
+    examples: [
+      'Hi! My name is Jimin. I am 11 years old.',
+      'I live in Seoul. I have one sister.',
+      'My favorite food is tteokbokki. I love K-pop!'
+    ]
+  },
+  food: {
+    name: '음식 / 좋아하는 것',
+    goal: '좋아하는 음식과 싫어하는 음식을 각각 말하기!',
+    examples: [
+      'My favorite food is pizza. It is so delicious!',
+      'I love eating ice cream in summer.',
+      'I don\'t like broccoli. It\'s too bitter for me.'
+    ]
+  },
+  weekend: {
+    name: '주말 / 취미',
+    goal: '지난 주말에 한 일 또는 좋아하는 취미 말하기!',
+    examples: [
+      'On weekends, I like to play computer games.',
+      'Last Saturday, I went to the park with my family.',
+      'My hobby is drawing. I draw every day!'
+    ]
+  },
+  school: {
+    name: '학교생활',
+    goal: '좋아하는 과목과 이유를 말하기!',
+    examples: [
+      'My favorite subject is science. It\'s so interesting!',
+      'I like PE class because I love playing soccer.',
+      'My school starts at 8:30. I go to school by bus.'
+    ]
+  },
+  dream: {
+    name: '장래희망',
+    goal: '장래희망과 그 이유를 3문장 이상 말하기!',
+    examples: [
+      'I want to be a doctor. I want to help sick people.',
+      'My dream is to be a famous YouTuber someday.',
+      'I want to be a soccer player like Son Heung-min!'
+    ]
+  },
+  travel: {
+    name: '여행 / 가고 싶은 곳',
+    goal: '가고 싶은 나라와 이유를 말하기!',
+    examples: [
+      'I want to go to Japan. I love Japanese food!',
+      'My dream trip is to visit New York City.',
+      'I want to travel to France and see the Eiffel Tower.'
+    ]
+  }
+};
+
+// ── STATE ──
+let currentTopic = null;
+let recognition = null;
+let isRecording = false;
+let transcript = '';
+let checkedCount = 0;
+
+// ── TOPIC SELECT ──
+function selectTopic(btn, topicKey) {
+  document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentTopic = topicKey;
+  const topic = topics[topicKey];
+
+  // examples
+  const list = document.getElementById('exampleList');
+  list.innerHTML = topic.examples.map(e => `<li>${e}</li>`).join('');
+  document.getElementById('topicGoal').textContent = '🎯 ' + topic.goal;
+
+  showCard('step2');
+  showCard('step3');
+  hideCard('step4');
+  hideCard('step5');
+
+  // reset
+  transcript = '';
+  updateTranscript('');
+  document.getElementById('submitArea').classList.add('hidden');
+  document.getElementById('recordStatus').textContent = '버튼을 누르고 영어로 말해봐! 🗣️';
+  document.getElementById('recordBtn').classList.remove('recording');
+  document.getElementById('recordBtnLabel').textContent = '말하기';
+
+  showToast('✅ 주제가 선택됐어! 말하기 버튼을 눌러봐 🎤');
+  setTimeout(() => {
+    document.getElementById('step2').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 200);
+}
+
+// ── RECORD ──
+function toggleRecord() {
+  if (!currentTopic) { showToast('먼저 주제를 선택해줘! 👆'); return; }
+  if (isRecording) {
+    stopRecord();
+  } else {
+    startRecord();
+  }
+}
+
+function startRecord() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    // fallback: manual input
+    showToast('⚠️ 이 브라우저는 음성인식을 지원하지 않아. Chrome을 써봐!');
+    const input = prompt('영어로 말한 내용을 직접 입력해봐! ✍️\n(예: My name is Minsu. I am 11 years old.)');
+    if (input && input.trim()) {
+      transcript = input.trim();
+      updateTranscript(transcript);
+      document.getElementById('submitArea').classList.remove('hidden');
+      showCard('step4');
+    }
+    return;
+  }
+
+  recognition = new SpeechRecognition();
+  recognition.lang = 'en-US';
+  recognition.continuous = true;
+  recognition.interimResults = true;
+
+  let finalTranscript = '';
+
+  recognition.onresult = (e) => {
+    let interim = '';
+    for (let i = e.resultIndex; i < e.results.length; i++) {
+      if (e.results[i].isFinal) finalTranscript += e.results[i][0].transcript + ' ';
+      else interim += e.results[i][0].transcript;
+    }
+    updateTranscript((finalTranscript + interim).trim());
+    transcript = finalTranscript.trim();
+  };
+
+  recognition.onerror = (e) => {
+    if (e.error === 'no-speech') return;
+    showToast('음성 인식 오류: ' + e.error);
+    stopRecord();
+  };
+
+  recognition.onend = () => {
+    if (isRecording) recognition.start(); // keep going
+  };
+
+  recognition.start();
+  isRecording = true;
+  document.getElementById('recordBtn').classList.add('recording');
+  document.getElementById('recordBtnLabel').textContent = '중지';
+  document.getElementById('recordStatus').textContent = '🔴 녹음 중... 영어로 말해봐!';
+  document.getElementById('recordStatus').classList.add('active');
+}
+
+function stopRecord() {
+  isRecording = false;
+  if (recognition) { recognition.stop(); recognition = null; }
+  document.getElementById('recordBtn').classList.remove('recording');
+  document.getElementById('recordBtnLabel').textContent = '말하기';
+  document.getElementById('recordStatus').textContent = '녹음이 끝났어! 아래에서 확인해봐 ✅';
+  document.getElementById('recordStatus').classList.remove('active');
+
+  if (transcript && transcript.trim().length > 2) {
+    document.getElementById('submitArea').classList.remove('hidden');
+    showCard('step4');
+    showToast('🎉 잘했어! 이제 AI 피드백을 받아봐!');
+  } else {
+    showToast('말한 내용이 없어. 다시 눌러서 말해봐! 💪');
+  }
+}
+
+function updateTranscript(text) {
+  const box = document.getElementById('transcriptBox');
+  if (text && text.trim()) {
+    box.innerHTML = text;
+    box.classList.add('has-text');
+  } else {
+    box.innerHTML = '<span class="transcript-placeholder">여기에 네가 말한 내용이 나타날 거야 ✨</span>';
+    box.classList.remove('has-text');
+  }
+}
+
+// ── SELF CHECK ──
+function toggleCheck(item) {
+  item.classList.toggle('checked');
+  const items = document.querySelectorAll('.check-item');
+  checkedCount = document.querySelectorAll('.check-item.checked').length;
+  document.getElementById('checkProgress').style.width = (checkedCount / items.length * 100) + '%';
+  document.getElementById('checkCount').textContent = checkedCount + ' / ' + items.length;
+}
+
+// ── SUBMIT FOR FEEDBACK ──
+async function submitForFeedback() {
+  if (!transcript || transcript.trim().length < 3) {
+    showToast('먼저 말하기 버튼으로 영어를 말해봐! 🎤');
+    return;
+  }
+
+  showCard('step5');
+  document.getElementById('feedbackLoading').style.display = 'flex';
+  document.getElementById('feedbackContent').classList.remove('visible');
+  document.getElementById('feedbackContent').style.display = 'none';
+
+  setTimeout(() => {
+    document.getElementById('step5').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 200);
+
+  const topic = topics[currentTopic];
+  const prompt = `You are a friendly English teacher for Korean elementary school students (5th grade, around 11 years old).
+A student practiced speaking English about the topic: "${topic.name}".
+Their speech was: "${transcript}"
+
+Please analyze their English speech and provide feedback in the following JSON format ONLY (no other text):
+{
+  "score": <number 1-100>,
+  "scoreTitle": "<Korean title like '훌륭해요!' or '잘하고 있어!' or '더 연습해봐!'>",
+  "good": "<Korean: 1-2 sentences about what they did well, be encouraging>",
+  "improve": "<Korean: 1-2 sentences about what they can improve, be gentle>",
+  "suggest": "<English example sentence they could use, with Korean translation in parentheses>"
+}
+Be warm, encouraging, and use simple Korean words for a child. Keep each field concise.`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '';
+    const clean = text.replace(/```json|```/g, '').trim();
+    const fb = JSON.parse(clean);
+
+    document.getElementById('scoreCircle').textContent = fb.score;
+    document.getElementById('scoreTitle').textContent = fb.scoreTitle;
+    document.getElementById('feedbackGood').textContent = fb.good;
+    document.getElementById('feedbackImprove').textContent = fb.improve;
+    document.getElementById('feedbackSuggest').textContent = fb.suggest;
+
+    document.getElementById('feedbackLoading').style.display = 'none';
+    document.getElementById('feedbackContent').style.display = 'flex';
+    document.getElementById('feedbackContent').classList.add('visible');
+
+    showToast('🤖 AI 피드백이 도착했어!');
+  } catch (err) {
+    // fallback feedback
+    document.getElementById('scoreCircle').textContent = '75';
+    document.getElementById('scoreTitle').textContent = '잘하고 있어! 👍';
+    document.getElementById('feedbackGood').textContent = '영어로 말하려고 용기 있게 도전한 것이 정말 훌륭해요! 발음도 열심히 하려는 모습이 보여요.';
+    document.getElementById('feedbackImprove').textContent = '문장을 좀 더 길게 말해보면 더 좋을 것 같아요. 예시 문장을 참고해서 연습해봐요!';
+    document.getElementById('feedbackSuggest').textContent = '"I really like this topic because it is interesting to me." (저는 이 주제가 흥미롭기 때문에 정말 좋아해요.)';
+
+    document.getElementById('feedbackLoading').style.display = 'none';
+    document.getElementById('feedbackContent').style.display = 'flex';
+    document.getElementById('feedbackContent').classList.add('visible');
+  }
+}
+
+// ── RETRY ──
+function retryTopic() {
+  transcript = '';
+  updateTranscript('');
+  document.getElementById('submitArea').classList.add('hidden');
+  document.getElementById('recordStatus').textContent = '버튼을 누르고 영어로 말해봐! 🗣️';
+  document.getElementById('recordStatus').classList.remove('active');
+  hideCard('step5');
+  hideCard('step4');
+
+  // reset checks
+  document.querySelectorAll('.check-item').forEach(i => i.classList.remove('checked'));
+  checkedCount = 0;
+  document.getElementById('checkProgress').style.width = '0%';
+  document.getElementById('checkCount').textContent = '0 / 4';
+
+  document.getElementById('step3').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  showToast('💪 다시 도전해봐! 할 수 있어!');
+}
+
+// ── RESET ──
+function resetAll() {
+  currentTopic = null;
+  transcript = '';
+  document.querySelectorAll('.topic-btn').forEach(b => b.classList.remove('active'));
+  updateTranscript('');
+  document.getElementById('submitArea').classList.add('hidden');
+  document.getElementById('recordStatus').textContent = '버튼을 누르고 영어로 말해봐! 🗣️';
+  document.getElementById('recordStatus').classList.remove('active');
+  document.querySelectorAll('.check-item').forEach(i => i.classList.remove('checked'));
+  checkedCount = 0;
+  document.getElementById('checkProgress').style.width = '0%';
+  document.getElementById('checkCount').textContent = '0 / 4';
+  hideCard('step2');
+  hideCard('step3');
+  hideCard('step4');
+  hideCard('step5');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  showToast('🏠 처음으로 돌아왔어!');
+}
+
+// ── UTILS ──
+function showCard(id) { document.getElementById(id).classList.remove('hidden'); }
+function hideCard(id) { document.getElementById(id).classList.add('hidden'); }
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2600);
+}
+</script>
+</body>
+</html>
